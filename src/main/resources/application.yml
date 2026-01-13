@@ -6,8 +6,22 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:9000
+#  cloud:
+#    gateway:
+#      server:
+#        webflux:
+#          routes:
+#            - id: order
+#              uri:
+#                http://localhost:8081
+#              predicates:
+#                - Path=/orders/**
 
 server:
   port: 8080
 logging:
   org.springframework.security: DEBUG
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${server.port}}}

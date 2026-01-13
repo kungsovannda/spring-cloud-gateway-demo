@@ -13,11 +13,15 @@ public class GatewayConfig {
         return builder.routes()
                 .route("order", r ->
                         r.path("/orders/**")
-                                .uri("http://localhost:8081")
+                                .uri("lb://ORDER")
                 )
                 .route("auth", r ->
                         r.path("/oauth2/**")
-                                .uri("http://localhost:9000")
+                                .uri("lb://SPRING-AUTH-SERVER")
+                )
+                .route("next-frontend", r->
+                        r.path("/**")
+                                .uri("http://localhost:3000")
                 )
                 .build();
 
